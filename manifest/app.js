@@ -4,6 +4,8 @@ Filename: app.js
 Contains: Main Defintion of cars and core site infomation used in other javascript files.
 */
 
+
+
 // Base Client Infomation
 var clientName;
 var clientSeatSelc;
@@ -11,7 +13,10 @@ var startDate;
 var endDate;
 var rentalTimePrice;
 var finalPrice;
-var selectedcar;
+var selectedcar
+
+// Common names that are entered as fake
+const commonNames = {}
 
 // Base rental fee charged on everything
 const rentalFee = 4.50;
@@ -39,7 +44,7 @@ const rentalFee = 4.50;
 // All Large Cars (listed above)
     const extraLarge = [outLander, estima]
 // Function to display the infomation once called, also so we can display updated infomation (future proofing)
-
+/* Old Code that was used for testing data.
 function createHTML(){
     var carInfo =
 	'<ul>' +
@@ -55,3 +60,5 @@ function createHTML(){
 $( document ).ready(function() {
     createHTML();
 });
+
+*/

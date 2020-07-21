@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     $( "#header" ).fadeIn( "20000", function() {});
+    document.title = "Welcome to Rob's Rental!"
 });
 
 $( "beginbutton" ).click(function() {
@@ -10,16 +11,17 @@ $( "beginbutton" ).click(function() {
     $( "#header" ).fadeOut( "20000", function() {});
     $( "#getname" ).fadeIn( "3000", function() {});
     $('body').animate({backgroundColor: 'blue'}, 'slow');
+    document.title = "Your Name";
   }
 
 
   function clientNameFinder(){
     clientName = document.getElementById("clientname").value;
-    if(clientName == null || clientName == ""){
-    
+    // if is a number don't allow, if it is null don't allow, if the box is empty or has spaces don't allow
+    if(!isNaN(clientName) || clientName == null || clientName == "" ){
       alert("Whoops! You have entered in a value which is not what we want! Try again.")
       // Common names that are entered as fake
-    }else if(clientName == "John Doe" || clientName == "John Smith" || clientName == "No Name"){
+    }else if(clientName == commonNames){
       // We want to make sure we have a real name
       confirm("Are you sure your name is " + clientName + "?")
       if(confirm == true){
@@ -41,6 +43,7 @@ $( "beginbutton" ).click(function() {
     $( "#getname" ).fadeOut( "20000", function() {});
     $( "#seatneeded" ).fadeIn( "3000", function() {});
     $('body').animate({backgroundColor: 'yellow'}, 'slow');
+    document.title =  "Seat Selector";
     console.log(clientName);
   }
 
@@ -56,24 +59,28 @@ $( "beginbutton" ).click(function() {
 
   function hideSeatsPrompt(){
     $( "#seatneeded" ).fadeOut( "20000", function() {});
+    document.title = "Rental Dates"
     $( "#setrentalleng-start" ).fadeIn( "3000", function() {});
   }
 
   function setRentalStartDate(){
     startDate = document.getElementById("startDate").value;
-    $( "#setrentalleng-start" ).fadeOut( "20000", function() {});
-    $( "#setrentalleng-end" ).fadeIn( "3000", function() {});
-    if(startDate == null || startDate == ""){
+    if(startDate == null){
       alert("Whoops! You have entered in a value which is not what we want! Try again.")
     };
     if(startDate){
-      setRentalEndDate()
-    }
+      hideStartDate()
+    }  
   }
+
+  function hideStartDate() {
+    $( "#setrentalleng-start" ).fadeOut( "20000", function() {});
+    $( "#setrentalleng-end" ).fadeIn( "3000", function() {});
+    // setRentalEndDate();
+  }
+
   function setRentalEndDate(){
     endDate = document.getElementById("endDate").value;
-    var endDateSplit = endDate.split("/");
-    console.log(endDateSplit);
     if(endDate == null || endDate == ""){
       alert("Whoops! You have entered in a value which is not what we want! Try again.")
     };
@@ -83,6 +90,7 @@ $( "beginbutton" ).click(function() {
   }
 
   function confirmClient(){
+    document.title = "Everything look good?";
     $( "#setrentalleng-end" ).fadeOut( "20000", function() {});
     $( "#clientconfirm" ).fadeIn( "3000", function() {});
     document.getElementById("clname").innerHTML = clientName; 
@@ -91,6 +99,7 @@ $( "beginbutton" ).click(function() {
   }
 
   function confirmed(){
+    document.title = "Processing....";
     $( "#clientconfirm" ).fadeOut( "3000", function() {});
     $('body').animate({backgroundColor: 'black'}, 'slow');
     processInfomation();
@@ -135,13 +144,14 @@ $( "beginbutton" ).click(function() {
 
 
   function informClient(){
+    document.title = "We have chosen you " + selectedcar.name + " woohoo!"
+    // Using JQuery UI once again to create a nice fade into the new section
     $( "#pleasewait" ).fadeOut( "3000", function() {});
     $('body').animate({backgroundColor: 'white'}, 'slow');
-
     $( "#selectedcar" ).fadeIn( "3000", function() {});
+    // Fill in the HTML with the infomation given.
     document.getElementById("carname").innerHTML = selectedcar.name;
     document.getElementById("carimage").src = selectedcar.imgurl;
-
     document.getElementById("rentalprice").innerHTML = finalPrice;
 
   }
