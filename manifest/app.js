@@ -9,9 +9,16 @@ var clientName;
 var clientSeatSelc;
 var startDate;
 var endDate;
+var rentalTimePrice;
+var finalPrice;
+var selectedcar;
+
+// Base rental fee charged on everything
+const rentalFee = 4.50;
+
 // Base Car defintions (names, etc)
     // All cars with 1-3 Seats (classifed as small cars on the site)
-    var bacMono = {"name": "BAC Mono", "price": 1, "seats": 1, "amountinstock": 2};
+    var bacMono = {"name": "BAC Mono", "price": 1, "seats": 1, "amountinstock": 2, "imgurl": "https://cimg1.ibsrv.net/ibimg/hgm/1920x1080-1/100/738/2021-bac-mono_100738709.jpg"};
     var mx5 = {"name": "Fazada MX5","price": 2, "seats": "2", "amountinstock": 0};
     // All Cars with 4-6 Seats (classifed as family cars on the site)
     var mini = {"name": "The Mini","price": 3, "seats": "4", "amountinstock": 2};

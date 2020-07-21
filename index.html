@@ -40,6 +40,22 @@
     <br>
     <p>End Date: <input type="text" id="endDate"></p>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalEndDate()">Awesome</button>
+</div>
+<div id="clientconfirm">
+    <h3>Just making sure:</h3>
+    <p>Your name is <span id="clname"></span></p>
+    <p>You need <span id="clientseats"></span> seats in your car</p>
+    <p>You are wanting to rent out for <span id="clientrentaldays"> days</span></p>
+    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="confirmed()">That is all correct</button>
+</div>
+<div id="pleasewait">
+    <h4 style="color: white;">processing....</h4>
+</div>
+<div id="selectedcar">
+    <h2>This car rocks!</h2>
+    <h3>We have selected a <span id="carname"></span> for you.</h3>
+    <img id="carimage" class="rounded-pill border border-primary" src="basecar.jpg" alt="">
+    <h2>The Price comes down to $<span id="rentalprice"></span></h2>
 
 </div>
 </body>
@@ -57,7 +73,17 @@
         text-align: center;
         margin-top: 20%;
     }
+    #pleasewait{
+        display: none;
+        text-align: center;
+        margin-top: 20%;
+    }
     #seatneeded{
+        display: none;
+        text-align: center;
+        margin-top: 20%;
+    }
+    #clientconfirm{
         display: none;
         text-align: center;
         margin-top: 20%;
@@ -67,13 +93,17 @@
         text-align: center;
         margin-top: 20%;
     }
+    #selectedcar{
+        display: none;
+        text-align: center;
+        margin-top: 20%;
+    }
     #setrentalleng-end{
         display: none;
         text-align: center;
         margin-top: 20%;
     }
-    #datepicker{
-        background-color: white;
-    }
+
+    
 </style>
 </html>
