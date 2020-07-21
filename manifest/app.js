@@ -29,18 +29,18 @@ Contains: Main Defintion of cars and core site infomation used in other javascri
 // Function to display the infomation once called, also so we can display updated infomation (future proofing)
 
 function createHTML(){
-    var carinfo =
+    var carInfo =
 	'<ul>' +
 		allCars.map(function (cars) {
             return '<li>' + '<b>' +  cars.name + '</b>' + ' Amount of Seats: ' + cars.seats + '</li>';
         }).join('') +
     '</ul>';
-    document.getElementById('cars').innerHTML = carinfo;
+    document.getElementById('cars').innerHTML = carInfo;
     console.log("Written HTML");
 }
 
 
-// Log and inject into the DOM
+// Log and inject into the webpage with jQuery
 $( document ).ready(function() {
     createHTML();
 });
