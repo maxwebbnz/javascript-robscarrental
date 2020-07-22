@@ -5,8 +5,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="manifest/homepage.js"></script>
     <script src="manifest/app.js"></script>
@@ -43,18 +43,21 @@
 </div>
 <div id="clientconfirm">
     <h3>Just making sure:</h3>
-    <p>Your name is <span id="clname"></span></p>
-    <p>You need <span id="clientseats"></span> seats in your car</p>
-    <p>You are wanting to rent out for <span id="clientrentaldays"> days</span></p>
+    <p>Your name is <span id="clname"></span.></p>
+    <p>You need <span id="clientseats"></span> seats in your car.</p>
+    <p>You are wanting to rent out the car for <span id="clientrentaldays"></span> days.</p>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="confirmed()">That is all correct</button>
 </div>
 <div id="pleasewait">
     <h4 style="color: white;">processing....</h4>
 </div>
 <div id="selectedcar">
+    <h1 id="noseats">We couldn't find a car that met the seat requirement, but heres the next best thing!</h1>
+    <h1 id="nostock">We are currently all booked out in your ideal car, but heres the next best thing!</h1>
     <h2>This car rocks!</h2>
     <h3>We have selected a <span id="carname"></span> for you.</h3>
     <img id="carimage" class="rounded-pill border border-primary" src="basecar.jpg" alt="">
+    <h4>This car has <span id="carseats"></span> seats.</h4>
     <h2>The Price comes down to $<span id="rentalprice"></span></h2>
 
 </div>
@@ -69,36 +72,43 @@
         margin-top: 20%;
     }
     #getname{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #pleasewait{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #seatneeded{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #clientconfirm{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #setrentalleng-start{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #selectedcar{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #setrentalleng-end{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
