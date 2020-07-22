@@ -43,18 +43,21 @@
 </div>
 <div id="clientconfirm">
     <h3>Just making sure:</h3>
-    <p>Your name is <span id="clname"></span></p>
-    <p>You need <span id="clientseats"></span> seats in your car</p>
-    <p>You are wanting to rent out for <span id="clientrentaldays"> days</span></p>
+    <p>Your name is <span id="clname"></span.></p>
+    <p>You need <span id="clientseats"></span> seats in your car.</p>
+    <p>You are wanting to rent out the car for <span id="clientrentaldays"></span> days.</p>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="confirmed()">That is all correct</button>
 </div>
 <div id="pleasewait">
     <h4 style="color: white;">processing....</h4>
 </div>
 <div id="selectedcar">
+    <h1 id="noseats">We couldn't find a car that met the seat requirement, but heres the next best thing!</h1>
+    <h1 id="nostock">We are currently all booked out in your ideal car, but heres the next best thing!</h1>
     <h2>This car rocks!</h2>
     <h3>We have selected a <span id="carname"></span> for you.</h3>
     <img id="carimage" class="rounded-pill border border-primary" src="basecar.jpg" alt="">
+    <h4>This car has <span id="carseats"></span> seats.</h4>
     <h2>The Price comes down to $<span id="rentalprice"></span></h2>
 
 </div>
@@ -69,36 +72,43 @@
         margin-top: 20%;
     }
     #getname{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #pleasewait{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #seatneeded{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #clientconfirm{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #setrentalleng-start{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #selectedcar{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
     #setrentalleng-end{
+        margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;

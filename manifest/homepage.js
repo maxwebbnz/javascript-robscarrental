@@ -9,11 +9,12 @@ $( "beginbutton" ).click(function() {
 
   function hideHeader(){
     $( "#header" ).fadeOut( "20000", function() {});
+    $("#header").animate({marginRight: '1000px'}, "slow");
+    $("#getname").animate({marginLeft: '1%'}, "slow");
     $( "#getname" ).fadeIn( "3000", function() {});
     $('body').animate({backgroundColor: 'blue'}, 'slow');
     document.title = "Your Name";
   }
-
 
   function clientNameFinder(){
     clientName = document.getElementById("clientname").value;
@@ -41,6 +42,7 @@ $( "beginbutton" ).click(function() {
 
   function hideNamePrompt(){
     $( "#getname" ).fadeOut( "20000", function() {});
+    $("#seatneeded").animate({marginLeft: '1%'}, "slow");
     $( "#seatneeded" ).fadeIn( "3000", function() {});
     $('body').animate({backgroundColor: 'yellow'}, 'slow');
     document.title =  "Seat Selector";
@@ -60,38 +62,41 @@ $( "beginbutton" ).click(function() {
   function hideSeatsPrompt(){
     $( "#seatneeded" ).fadeOut( "20000", function() {});
     document.title = "Rental Dates"
+    $("#setrentalleng-start").animate({marginLeft: '1%'}, "slow");
     $( "#setrentalleng-start" ).fadeIn( "3000", function() {});
   }
 
   function setRentalStartDate(){
     startDate = document.getElementById("startDate").value;
-    if(startDate == null){
+    if(startDate == null || isNaN(startDate)){
       alert("Whoops! You have entered in a value which is not what we want! Try again.")
     };
-    if(startDate){
+    if(startDate == true){
       hideStartDate()
     }  
   }
 
   function hideStartDate() {
     $( "#setrentalleng-start" ).fadeOut( "20000", function() {});
+    $("#setrentalleng-end").animate({marginLeft: '1%'}, "slow");
     $( "#setrentalleng-end" ).fadeIn( "3000", function() {});
     // setRentalEndDate();
   }
 
   function setRentalEndDate(){
     endDate = document.getElementById("endDate").value;
-    if(endDate == null || endDate == ""){
+    if(endDate == null || endDate == "" || isNaN(endDate)){
       alert("Whoops! You have entered in a value which is not what we want! Try again.")
     };
     if(endDate){
-      confirmClient()
+        confirmClient()
     }
   }
 
   function confirmClient(){
     document.title = "Everything look good?";
     $( "#setrentalleng-end" ).fadeOut( "20000", function() {});
+    $("#clientconfirm").animate({marginLeft: '1%'}, "slow");
     $( "#clientconfirm" ).fadeIn( "3000", function() {});
     document.getElementById("clname").innerHTML = clientName; 
     document.getElementById("clientseats").innerHTML = clientSeatSelc; 
@@ -107,13 +112,23 @@ $( "beginbutton" ).click(function() {
   
   function processInfomation(){
     $( "#pleasewait" ).fadeIn( "3000", function() {});
-
+    $("#pleasewait").animate({marginLeft: '1%'}, "slow");
       try{
         // Tries the first attempt at finding a car that suits the infomation given
-         selectedcar = allCars.find(element => element.seats == clientSeatSelc);
+        selectedcar = allCars.find(element => element.seats == clientSeatSelc);
+        // checking if it could actually find a car that has the right amount of seats.
+        if(selectedcar == null){
+          // Will find a car that has a greater amount of seats if it is below 8 (max amount of seats per car)
+          if(clientSeatSelc >= 8){
+
+            carNotFound(seats);
+          }
+          selectedcar = allCars.find(element => element.seats > clientSeatSelc);
+        }
         // If the best car is not in stock lets find the next best thing
         if(selectedcar.amountinstock < 1){
              selectedcar = allCars.find(element => element.amountinstock > 1);
+             carNotFound(stock);
             // Fixing an error I didn't think about :< this makes sure that we are giving them a car that suits there needs.
             if(selectedcar.seats < clientSeatSelc){
                  selectedcar = allCars.find(element => element.seats > clientSeatSelc);
@@ -142,16 +157,25 @@ $( "beginbutton" ).click(function() {
     }
   }
 
-
   function informClient(){
     document.title = "We have chosen you " + selectedcar.name + " woohoo!"
     // Using JQuery UI once again to create a nice fade into the new section
     $( "#pleasewait" ).fadeOut( "3000", function() {});
     $('body').animate({backgroundColor: 'white'}, 'slow');
+    $("#selectedcar").animate({marginLeft: '1%'}, "slow");
     $( "#selectedcar" ).fadeIn( "3000", function() {});
     // Fill in the HTML with the infomation given.
     document.getElementById("carname").innerHTML = selectedcar.name;
+    document.getElementById("carseats").innerHTML = selectedcar.seats;
     document.getElementById("carimage").src = selectedcar.imgurl;
     document.getElementById("rentalprice").innerHTML = finalPrice;
+  }
 
+  function carNotFound(noseats, nostock){
+    if(noseats){
+      $( "#noseats" ).fadeIn( "3000", function() {});
+    }
+    if(nostock){
+      $( "#nostock" ).fadeIn( "3000", function() {});
+    }
   }
