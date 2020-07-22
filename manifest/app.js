@@ -13,13 +13,14 @@ var startDate;
 var endDate;
 var rentalTimePrice;
 var finalPrice;
-var selectedcar
+var selectedcar;
 
 // Common names that are entered as fake
 const commonNames = {}
 
 // Base rental fee charged on everything
 const rentalFee = 4.50;
+
 
 // Base Car defintions (names, etc)
     // All cars with 1-3 Seats (classifed as small cars on the site)

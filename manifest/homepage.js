@@ -104,16 +104,25 @@ $( "beginbutton" ).click(function() {
     $('body').animate({backgroundColor: 'black'}, 'slow');
     processInfomation();
   }
-  
+
   function processInfomation(){
     $( "#pleasewait" ).fadeIn( "3000", function() {});
 
       try{
         // Tries the first attempt at finding a car that suits the infomation given
-         selectedcar = allCars.find(element => element.seats == clientSeatSelc);
+        selectedcar = allCars.find(element => element.seats == clientSeatSelc);
+        //  if the number of seats that is lower than the higher amount of seats (9) it will find something greater than the amount given ot if there was a mistake, equal too.
+        if($.inArray(clientSeatSelc, allCars.seats)){
+          selectedcar = allCars.find(element => element.seats >= clientSeatSelc);
+        }
+       // if($.inArray(Math.max(allCars), allCars.seats)){
+        //  selectedcar = allCars.find(element => element.seats < clientSeatSelc);
+      //}
+        // checking if it could actually find a car that has the right amount of seats.
         // If the best car is not in stock lets find the next best thing
         if(selectedcar.amountinstock < 1){
-             selectedcar = allCars.find(element => element.amountinstock > 1);
+             selectedcar = allCars.find(element => element.amountinstock > 1 && element.seats >= clientSeatSelc);
+             carNotFound(stock);
             // Fixing an error I didn't think about :< this makes sure that we are giving them a car that suits there needs.
             if(selectedcar.seats < clientSeatSelc){
                  selectedcar = allCars.find(element => element.seats > clientSeatSelc);
