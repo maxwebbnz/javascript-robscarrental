@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Datepicker-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/locales/bootstrap-datepicker.en-GB.min.js" charset="UTF-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -13,6 +16,9 @@
     <title>Rob's Rentals</title>
 </head>
 <body>
+<!-- Progress Bar 
+<div id="progressbar"></div>
+-->
 <div id="header">
     <h1>Welcome</h1>
     <h3>Rob Rentals</h3>
@@ -29,16 +35,10 @@
     <center><input style="width: 40%;"type="text" id="seatsneeded" class="form-control" placeholder="Tell us a number!" aria-label="Username" aria-describedby="basic-addon1"></center>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="seatsFinder()">Awesome</button>
 </div>
-<div id="setrentalleng-start">
-    <h4>When would you need the car?</h4>
+<div id="setrentalleng">
+    <h4>When how long will you be needing the car?</h4>
     <br>
-    <p>Start Date: <input type="text" id="startDate"></p>
-    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalStartDate()">Cool!</button>
-</div>
-<div id="setrentalleng-end">
-    <h4>When would you be returning the car?</h4>
-    <br>
-    <p>End Date: <input type="text" id="endDate"></p>
+    <p>Time (in numbers): <input type="text" id="rentalTime"></p>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalEndDate()">Cool!</button>
 </div>
 <div id="clientconfirm">
@@ -57,11 +57,15 @@
 </div>
 <div id="selectedcar">
     <h2>This car rocks!</h2>
-    <h3>We have selected a <span id="carname"></span> for you.</h3>
+    <h3>We have selected you a:
+    <br><span id="carname"></span></h3>
     <img id="carimage" class="rounded-pill border border-primary" src="basecar.jpg" alt="">
     <h4>This car has <span id="carseats"></span> seats.</h4>
-    <h2>The Price comes down to $<span id="rentalprice"></span></h2>
-
+    <h2>Your estimated rental fee is $<span id="rentalprice"></span> per day.</h2>
+    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="finalDetails()">Finialise</button>
+</div>
+<div id="redirectingnotice">
+    <h2>Redirecting...</h2>
 </div>
 </body>
 <style>
@@ -97,7 +101,7 @@
         text-align: center;
         margin-top: 20%;
     }
-    #setrentalleng-start{
+    #setrentalleng{
         margin-left: 100%;
         display: none;
         text-align: center;
@@ -109,7 +113,7 @@
         text-align: center;
         margin-top: 20%;
     }
-    #setrentalleng-end{
+    #redirectingnotice{
         margin-left: 100%;
         display: none;
         text-align: center;
