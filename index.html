@@ -33,7 +33,7 @@
     <h4>When would you need the car?</h4>
     <br>
     <p>Start Date: <input type="text" id="startDate"></p>
-    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalStartDate()">Awesome</button>
+    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalStartDate()">Cool!</button>
 </div>
 <div id="setrentalleng-end">
     <h4>When would you be returning the car?</h4>
@@ -51,9 +51,11 @@
 <div id="pleasewait">
     <h4 style="color: white;">processing....</h4>
 </div>
+<div id="handling">
+    <h1 id="noseats" style="display: none;">We couldn't find a car that met the seat requirement, but heres the next best thing!</h1>
+    <h1 id="nostock" style="display: none;">We are currently all booked out in your ideal car, but heres the next best thing!</h1>
+</div>
 <div id="selectedcar">
-    <h1 id="noseats">We couldn't find a car that met the seat requirement, but heres the next best thing!</h1>
-    <h1 id="nostock">We are currently all booked out in your ideal car, but heres the next best thing!</h1>
     <h2>This car rocks!</h2>
     <h3>We have selected a <span id="carname"></span> for you.</h3>
     <img id="carimage" class="rounded-pill border border-primary" src="basecar.jpg" alt="">
