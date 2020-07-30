@@ -1,0 +1,39 @@
+begin
+    when button is true
+        display #getname section
+        start Name Section
+                Name Section
+                    when button is true
+                        if value of input clientname is a number or of a null value 
+                            alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
+                            wait till user tries again
+                        else if clientName equals a common name pre-defined
+                            prompt user to confirm the name
+                                if confirm window is true
+                                    fade out #getname section
+                                    animate #seatneeded to center of the screen
+                                    fade in #seatneeded
+                                    animate body background-color to yellow
+                                    change title of page to Seat Selection
+                                    log Client's Name
+                                else if confirm window is false
+                                    alert user to try again (e.g Enter in a real name and try again)
+                        else if input passes all checks
+                                    fade out #getname section
+                                    animate #seatneeded to center of the screen
+                                    fade in #seatneeded
+                                    animate body background-color to yellow
+                                    change title of page to Seat Selection
+                                    log Client's Name
+                                    start Seats Section
+                Seats Section
+                    when button is true 
+                        if value of input seatsneeded is not a number or of null value
+                             alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
+                             wait till user pushes button again
+                        else if input passes all checks
+                            fade out #seatneeded section
+                            animate #setRentalDate to center of the screen
+                            fade in #setRentalDate
+                            change title of page to Rental Dates
+                         log Client's Seat Choice

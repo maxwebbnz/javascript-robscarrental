@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <!-- Datepicker-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/locales/bootstrap-datepicker.en-GB.min.js" charset="UTF-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>    
     <script src="manifest/homepage.js"></script>
     <script src="manifest/app.js"></script>
+    <script src="manifest/excutemail.js"></script>
     <title>Rob's Rentals</title>
 </head>
 <body>
@@ -39,7 +39,7 @@
     <h4>When how long will you be needing the car?</h4>
     <br>
     <p>Time (in numbers): <input type="text" id="rentalTime"></p>
-    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalEndDate()">Cool!</button>
+    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="setRentalDate()">Cool!</button>
 </div>
 <div id="clientconfirm">
     <h3>Just making sure:</h3>
@@ -64,9 +64,19 @@
     <h2>Your estimated rental fee is $<span id="rentalprice"></span> per day.</h2>
     <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="finalDetails()">Finialise</button>
 </div>
-<div id="redirectingnotice">
-    <h2>Redirecting...</h2>
+<div id="emailgetter">
+    <h4 style="color: white;">Heres the fun stuff</h4>
+    <h4 style="color: white;">Whats your email?</h4>
+    <center><input style="width: 40%;"type="email" id="clientEmail" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1"></center>
+    <button style="margin-top: 8px;" type="button" class="btn btn-primary btn-lg" onclick="emailGrabbed()">Thats my email</button>
 </div>
+<div id="alldone">
+    <h1>All Done</h1>
+    <h3>Please check your emails for your booking infomation (check Spam inbow)</h3>
+    <br>
+    <h6>Want to book another car?</h6>
+    <button type="button" class="btn btn-primary btn-lg" onclick="startAgain()">Start Again</button>
+</div>    
 </body>
 <style>
     body{
@@ -113,13 +123,16 @@
         text-align: center;
         margin-top: 20%;
     }
-    #redirectingnotice{
+    #emailgetter{
         margin-left: 100%;
         display: none;
         text-align: center;
         margin-top: 20%;
     }
-
-    
+    #alldone{
+        display: none;
+        text-align: center;
+        margin-top: 20%;
+    }
 </style>
 </html>

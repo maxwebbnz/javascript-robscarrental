@@ -76,7 +76,7 @@ function hideSeatsPrompt(){
 }
 
 
-function setRentalEndDate(){
+function setRentalDate(){
   rentalTime = document.getElementById("rentalTime").value;
   if(rentalTime == null || rentalTime == "" || isNaN(rentalTime)){
     alert("Whoops! You have entered in a value which is not what we want! Try again.")
@@ -171,10 +171,20 @@ function confirmed(){
 
   function finalDetails(){
     $( "#selectedcar" ).fadeOut( "3000", function() {});
-    $('body').animate({backgroundColor: 'blue'}, 'slow');
-    $("#selectedcar").animate({marginLeft: '1%'}, "slow");
-    $( "#redirectingnotice" ).fadeOut( "3000", function() {});
-    window.location.href = '/Users/maxwebb/Documents/Digital%20Technology/Javascript/javascript-robscarrental/finaldetails.html?car = ' + selectedcar + '?clientname = ' + clientName + '?clientrentaldetails = {"price": ' + rentalTimePrice + ', "rentalTime": ' + rentalTime + '}';
+    $('body').animate({backgroundColor: 'red'}, 'slow');
+    $("#emailgetter").animate({marginLeft: '1%'}, "slow");
+    $( "#emailgetter" ).fadeIn( "3000", function() {});
+  }
 
+  function emailGrabbed(){
+    clientEmail = document.getElementById("clientEmail").value
+    $( "#emailgetter" ).fadeOut( "3000", function() {});
+    $('body').animate({backgroundColor: 'white'}, 'slow');
+    excuteEmail();
+    $("#alldone").animate({marginLeft: '1%'}, "slow");
+    $( "#alldone" ).fadeIn( "3000", function() {});
+  }
 
+  function startAgain(){
+    location.reload();
   }
