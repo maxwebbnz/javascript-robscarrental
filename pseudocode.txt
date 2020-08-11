@@ -1,3 +1,4 @@
+v.6
 begin
     when button is true
         display #getname section
@@ -26,7 +27,7 @@ begin
                                     change title of page to Seat Selection
                                     log Client's Name
                                     start Seats Section
-                Seats Section
+            Seats Section
                     when button is true 
                         if value of input seatsneeded is not a number or of null value
                              alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
@@ -36,4 +37,54 @@ begin
                             animate #setRentalDate to center of the screen
                             fade in #setRentalDate
                             change title of page to Rental Dates
-                         log Client's Seat Choice
+                         log Client's Seat Choice 
+            Rental Date Section
+                    when button is true
+                        if value of input rentalTime is not a number or of null value
+                             alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
+                             wait till user pushes button again
+                        else if input passes all checks
+                            fade out #setrentalleng
+                            animate client confirm section to center of screen
+                            fade in client confirm section
+                            change title of page to Confirm Selection
+                            start Processing infomation
+            Processing Infomation Section
+                    when Processing Infomation is true
+                        change page title to Processing
+                            try
+                                find in selectedCar variable for car equals the client's seat wishes.
+                                    set selectedCar to found infomation
+                                if there is no seats that match excatly what the user entered
+                                    find in allCars array a car that has seats greater than the client's seat wishes.
+                                        set selectedCar to found infomation
+                                else if the selectedCar is not in stock
+                                    find in allCars array a car that has a car in stock which matches the client's seat wishes or is greater than client's seat wishes
+                                        set selectedCar to found infomation
+                                if selectedCar is less than clientSeatSelec
+                                    find in allCars array a car that is greater than clientSeatSelec
+                                        set selectedCar to found Infomation
+                                finally 
+                                    log to console the selectedCar name.
+                            when error occurs
+                                catch and log to console.
+                        after car has been found
+                            set the rentalTimePrice to be 2 times the amount of the rentalTime (defined by user)
+                            then set finalPrice to be the total of the rentalTimePrice, rentalFee and the selectedCar.price object.
+                            log the price that has been found 
+                            start informClient
+            Inform CLient Section
+                    once informClient has started
+                        set page title to the car that has been chosen
+                        fill the page with the following:
+                            carname = selectedCar.name
+                            carseats = selectedCar.seats
+                            carimage = selectedCar.imgurl
+                            rentalPrice = finalPrice
+                Final Details Section
+                    once button is pressed
+                        set clientEmail to the value from the value
+                        once set
+                            send email to the clientEmail
+                end section
+end program

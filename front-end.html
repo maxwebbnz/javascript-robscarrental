@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Rob's Rentals</title>
+    <meta charset="UTF-8">
+    <!-- Datepicker-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <!-- <script src="manifest/homepage.js"></script> -->
+    <script src="manifest/new-home.js"></script>
+    <script src="manifest/app.js"></script>
+    <script src="manifest/excutemail.js"></script>
+</head>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                class="d-inline-block align-top" alt="" loading="lazy">
+            Rob's Rentals
+        </a>
+    </nav>
+</header>
+
+<body>
+    <!-- First Section shown to user-->
+    <div class="welcome">
+        <h4>Welcome to Rob's Rentals Car Co.</h4>
+        <p>Providing Rentals to the greater public since 1978</p>
+        <hr>
+        <h5>Let's find you a car!</h5>
+        <button type="button" class="btn btn-primary" data-toggle="button" onclick="sectionFader('welcome','selection');" aria-pressed="false">Let's GO!</button>
+    </div>
+    <!-- Second Section shown to the user -->
+    <div class="selection">
+        <div class="container">
+            <h5>Would you like to</h5>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                        autocomplete="off">Search for a Car</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                        autocomplete="off">Let Us Decide</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    .welcome {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    hr {
+        width: 30%;
+    }
+
+    .selection {
+        text-align: center;
+        margin-top: 5%;
+        display: none;
+        margin-left: 10000%;
+    }
+</style>
+
+</html>
