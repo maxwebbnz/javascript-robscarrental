@@ -9,6 +9,15 @@ Some content referenced in this file can be found in the app file (app.js)
 
 // Global Functions and/or Base defintions of variables \\
 
+// Global Object 
+var global = {
+  setSection: function (section) {
+    document.title = "Rob's Rentals | " + section
+    console.log("Section Changed to " + section)
+  }
+}
+
+// Vaildation Object
 var validate = {
   // This is used to vaildate all input in the program, referenced by vaildate.(whateveryouwanttovaildate)
   text: function (str) {
@@ -32,24 +41,87 @@ var validate = {
   }
 };
 
+// End of Global Declerations \\ 
 // Welcome Section Loader \\
 $(document).ready(function () {
-  homePage.displayCars();
-  homePage.fadeIn();
+  homePage.display();
 });
 
+
 // Pages and there functions, defintions, etc (in order) \\
+// Home Page
 var homePage = {
-  // Display the cars that are avaible on the home page
-  displayCars: function () {
-    allCars.forEach(element => {
-        $('.carousel-item').append('<div class="carousel-item"><img class="d-block w-100" src=' + element.imgurl +'alt="Second slide"></div>');
-    })
-  },
-  fadeIn: function () {
+  display: function () {
     $(".headers").fadeIn();
+    global.setSection("Home")
+  },
+  destroy: function () {
+    $(".headers").fadeOut();
+    console.log("Home Page Destroyed")
   }
 }
+
+// Menu Selector
+var menuSelector = {
+  display: function () {
+    $(".selector").fadeIn();
+    global.setSection("Menu Selection")
+  },
+  // Setting the path the user wants to take 
+  setPath: function (path) {
+    userPath = path;
+    enterDetails.display(userPath)
+  },
+  destroy: function () {
+    $(".selector").fadeOut();
+    console.log("Menu Selection Page Destroyed")
+  }
+}
+// Enter Details for both views
+var enterDetails = {
+  display: function () {
+    // If user wants to use our filter tool
+    if (userPath == "filter") {
+      // Change name for section
+      global.setSection("Filter Selection")
+      // Fade in the .filter div class.
+      $('.filter').fadeIn();
+      // Else if the user wants to use our automatic process (v1 of program)
+    } else if (userPath == "auto") {
+      // Change name for section
+      global.setSection("Automatic Choice")
+      // Fade in the .auto-start div class (Start of process).
+      $('.auto-start').fadeIn();
+    }
+  },
+  // The functions below are used for when the user is wanting to find their ideal car
+  idealCar: function () {
+    if (validate.text(document.getElementById("carIdealForClient").value)) {
+      userIdealCar = document.getElementById("carIdealForClient").value;
+      console.log("hello that is true man")
+      this.destroy("filter")
+    } else if (!validate.text(document.getElementById("carIdealForClient").value)) {
+      $("#carIdealForClient").after('<p class="alert">Are you sure that is correct infomation? Because we dont think so</p>');
+      console.log("Error! Incorrect Infomation Given")
+    }
+  },
+  destroy: function (section) {
+    if (section == "filter") {
+      $(".filter").fadeOut();
+      console.log("All Parts from the Filter Selection Page Destroyed")
+    } else if (section == "auto") {
+      $(".auto").fadeOut();
+      console.log("All Parts from the Auto Selection Page Destroyed")
+    }
+  }
+}
+
+
+
+
+
+
+
 
 
 

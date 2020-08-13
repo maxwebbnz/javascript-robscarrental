@@ -14,6 +14,9 @@ var rentalTimePrice;
 var selectedcar;
 var finalPrice;
 var clientEmail;
+// New Variables (For v2)
+var usersPath;
+var userIdealCar;
 
 //  Regex's for name and numeric values vaildation
 
