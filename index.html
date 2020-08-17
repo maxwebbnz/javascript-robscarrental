@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="manifest/app.js"></script>
     <script src="manifest/homepage.js"></script>
     <title>Loading Site...</title>
@@ -20,23 +32,12 @@
         <a class="navbar-brand" href="#"><span id="sitetitle"></span></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon">Rob's Rentals</span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
+                    <a id="userName" class="userName nav-link">hi</a>
                 </li>
             </ul>
         </div>
@@ -44,11 +45,27 @@
 </header>
 
 <body>
-    <!-- Header Section -->
+    <!-- Headers Section -->
     <div class="headers">
-        <p id="carName">haidhwa</p>
+        <h2>Welcome to Rob's Rentals </h2>
+        <button type="button" name="" id="" class="btn btn-primary" onclick="homePage.destroy() + nameFinder.display()"
+            btn-lg btn-block">Select a Car</button>
+    </div>
+    <!-- Same section but displayed at the end!-->
+    <div class="final">
+        <h2>All Done and Dusted!</h2>
+        <p><i>Please check your inbox for the final rental pricing and details</i></p>
+        <hr>
+        <h6>Need another car?</h6>
         <button type="button" name="" id="" class="btn btn-primary"
-            onclick="homePage.destroy() + menuSelector.display()" btn-lg btn-block"></button>
+            onclick="homePage.destroy() + menuSelector.display()" btn-lg btn-block">Select a Car</button>
+    </div>
+    <!-- Name Section -->
+    <div class="nameFinder">
+        <h4>First, what's your name?</h4>
+        <input id="clientName" placeholder="First and Last">
+        <button type="button" class="btn btn-primary" onclick="nameFinder.submit()">Submit</button>
+        <p class="alert">The name that you entered is not vaild, try again!</p>
     </div>
     <!-- Selector Section -->
     <div class="selector">
@@ -56,9 +73,9 @@
         <p><i>To choose your car</i></p>
         <hr>
         <button type="button" class="btn btn-primary"
-            onclick="menuSelector.setPath('filter') + menuSelector.destroy()">I have specfic things I need!</button>
-        <button type="button" class="btn btn-primary" onclick="menuSelector.setPath('auto') + menuSelector.destroy()">I
-            just need a car</button>
+            onclick="menuSelector.setPath('filter') + menuSelector.destroy()">I know what I want</button>
+        <button type="button" class="btn btn-primary"
+            onclick="menuSelector.setPath('auto') + menuSelector.destroy()">Help me choose a car</button>
     </div>
     <!-- Filter Selector Section -->
     <div class="filter">
@@ -66,32 +83,135 @@
             <label for="clientName">What car did you have in mind?</label>
             <input type="text" class="form-control" id="carIdealForClient" placeholder="Mazada MX5">
             <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar()">That's the Car!</button>
-            <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar(" noCar")">I don't know what
-                car I want</button>
+            <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar('noCar')">I don't know what car
+                I want</button>
         </form>
     </div>
     <!-- End of Filter Section -->
 
     <!-- Automatic Quesition-neer Section -->
-
+    <div class="auto">
+        <!-- Seat Drop Down-->
+        <div class="seatsselection">
+            <h4>How many seats will you be needing in your car?</h4>
+            <hr>
+            <select id="seats">
+                <option value="">Number of Seats</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
+        <!-- Price Range-->
+        <div class="price-range">
+            <h4>What type of car were you looking for?</h4>
+            <hr>
+            <button type="button" id="b1" value="budget" class="btn btn-primary">Budget</button>
+            <button type="button" id="b2" value="family" class="btn btn-primary">Family</button>
+            <button type="button" id="b3" value="professional" class="btn btn-primary">Professional</button>
+        </div>
+    </div>
     <!-- End of Question Section -->
+    <!-- Looping back to final steps -->
+    <div class="showSelected">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img src="" width="40%" height="60%" class="rounded border border-primary" id="carImage"
+                        alt="Car Image">
+                    <hr>
+                    <b><span id="carName"></span></b>
+                    <br>
+                    <p>$<span id="carPrice"></span></p>
+                </div>
+                <div class="col">
+                    <h3>We found you this awesome car!</h3>
+                    <hr>
+                    <h4>Happy with this choice?</h4>
+                    <button type="button" class="btn btn-primary" onclick="selected.happy(true)">Yes I am!</button>
+                    <button type="button" class="btn btn-primary" onclick="selected.happy()">I think I want something
+                        else!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Now to ask for there email address to email final price -->
+    <div class="emailPlease">
+        <h4>What is your email address?</h4>
+        <h6>We don't share your data to anyone else</h6>
+        <hr>
+        <input id="emailAddress">
+        <button type="button" class="btn btn-primary" onclick="email.submit()">Submit</button>
+        <p class="alert">The email that you entered is not vaild, try again!</p>
+    </div>
 </body>
 <style>
+    #userName {
+        display: none;
+    }
+
     .headers {
         display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .final {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .nameFinder {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
     }
 
     .selector {
         display: none;
         text-align: center;
+        margin-top: 4%;
     }
 
     .filter {
         display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+    .seatsselection{
+        display: none;
+    }
+    .price-range {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .auto {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .showSelected {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .emailPlease {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
     }
 
     .alert {
         color: red;
+        display: none;
     }
 </style>
 
