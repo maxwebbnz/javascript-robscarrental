@@ -149,6 +149,9 @@ var enterDetails = {
     if (userPath == "filter") {
       // Change name for section
       global.setSection("Filter Selection")
+      allCars.forEach(function (entry) {
+        $("#carList").append(`<option>${entry.name}</option>`);
+      });
       // Fade in the .filter div class.
       $('.filter').fadeIn();
       // Else if the user wants to use our automatic process (v1 of program)
@@ -189,8 +192,8 @@ var enterDetails = {
       // log 
       console.log("User made an Error! Whoops! Changing Section to " + userPath)
     } else {
-      // set the userIdealCar to the value of the inoput
-      userIdealCar = document.getElementById("carIdealForClient").value;
+      // set the userIdealCar to the value of the drop down menu
+      userIdealCar = $("#carList").val();;
       // enterDetails.destroy('filter')
       this.destroy("filter");
       // Then find the car!
@@ -199,27 +202,23 @@ var enterDetails = {
         // log success
         console.log("findCar() returned true, conveying infomation to final steps.")
         this.destroy();
-        selected.display();
-        // Filling in site span's with infomation from selectedCar object
         document.getElementById("carName").innerHTML = selectedCar.name;
+        document.getElementById("finalCarName").innerHTML = selectedCar.name;
         document.getElementById("carImage").src = selectedCar.imgurl;
         document.getElementById("carPrice").innerHTML = selectedCar.price;
-
+        selected.display();
+        // Filling in site span's with infomation from selectedCar object
       } else {
         // log failure
         console.log("findCar() didn't find a car, that sucks :(")
         // Now we want to tell the user what we are doing
-        alert("We couldn't find you a car that matches your wishes, hence why we are now moving you to the automatic")
+        bootbox.alert("We couldn't find a car for you or we had an error, we will take you back to the start!");
         userPath = "auto";
         this.destroy("filter");
         this.display();
         console.log("Program made an Error! Whoops! Changing Section to " + userPath)
       }
     }
-  },
-  // a looping sort of function which loops back around to auto allocation (geez max make it hard on yourself)
-  setSection: function (_sec) {
-    this.autoAllocation(_sec);
   },
   // This is used for us finding the car for them
   // section stands for what part of the progress we are up to (only used once)
@@ -232,8 +231,9 @@ var enterDetails = {
         console.log("Seat Selection has been set to " + clientSeatSelc);
         // this.autoAllocation("price")
         // instead...
-        this.setSection("price");
-        this.destroy();
+        console.log(this);
+        enterDetails.setSection("price");
+        enterDetails.destroy();
       })
     }
     if (_section == "price") {
@@ -242,8 +242,9 @@ var enterDetails = {
       $('#b1, #b2, #b3').click(function () {
         userPriceRange = $(this).val();
         console.log(userPriceRange + " is the price range the user wants")
-        this.setSection("processInfomation");
-        this.destroy();
+        enterDetails.destroy();
+        $(".price-range").fadeOut();
+        enterDetails.setSection("processInfomation");
       });
     }
     // the fun happens now, processing all this manual entries
@@ -254,7 +255,7 @@ var enterDetails = {
           if (!selectedCar.price < 100) {
             selectedCar = allCars.find(element => element.price <= 100 && element.seats >= clientSeatSelc);
             if (selectedCar == null) {
-              alert("couldn't find a car in this price range")
+              bootbox.alert("Couldn't find a car in that price range!");
               this.destroy();
               menuSelector.display();
             }
@@ -264,7 +265,7 @@ var enterDetails = {
           if (!selectedCar.price < 200) {
             selectedCar = allCars.find(element => element.price <= 200 && element.seats >= clientSeatSelc);
             if (selectedCar == null) {
-              alert("couldn't find a car in this price range")
+              bootbox.alert("Couldn't find a car in that price range!");
               this.destroy();
               menuSelector.display();
             }
@@ -274,27 +275,30 @@ var enterDetails = {
           if (!selectedCar.price < 300) {
             selectedCar = allCars.find(element => element.price <= 300 && element.seats >= clientSeatSelc);
             if (selectedCar == null) {
-              alert("couldn't find a car in this price range")
+              bootbox.alert("Couldn't find a car in that price range!");
               this.destroy();
               menuSelector.display();
             }
           }
         }
         // This only works if there is no errors
+        enterDetails.destroy();
         document.getElementById("carName").innerHTML = selectedCar.name;
         document.getElementById("carImage").src = selectedCar.imgurl;
         document.getElementById("carPrice").innerHTML = selectedCar.price;
-        this.destroy();
         selected.display();
       }
       catch (err) {
         console.log(err)
-        alert("Sorry! \n There was an error with something, sending you to the start")
-        this.destroy();
-        menuSelector.display();
+        // POINT OF INTEREST BELOW 
+        bootbox.alert("We encountered an error, restarting program! Sorry for the inconveince");
       }
     }
-  }
+  },
+  // a looping sort of function which loops back around to auto allocation (geez max make it hard on yourself)
+  setSection: function (_sec) {
+    this.autoAllocation(_sec);
+  },
 };
 
 // Show Selected Section Objects
@@ -312,15 +316,38 @@ var selected = {
     if (_happy) {
       console.log("Client has locked in question A")
       this.destroy();
-      email.display();
+      dates.display();
     } else {
-      alert("You weren't happy, so we are taking you back around to the start");
+      bootbox.alert("Taking you back to the start!");
       this.destroy();
       menuSelector.display();
     }
   }
 }
 
+// Dates Selection Section Object
+var dates = {
+  display: function () {
+    $(".datesSelection").fadeIn();
+    global.setSection("Dates")
+  },
+  destroy: function () {
+    $(".datesSelection").fadeOut();
+    // Log for error checking / handling
+    console.log("Selected Page Destroyed");
+  },
+  dateGrab: function () {
+    if(!validate.num(document.getElementById("clientRentalDay").value)){
+      $(".alert").fadeIn();
+    }else{
+      rentalDays = document.getElementById("clientRentalDay").value
+      console.log("Client wants to hire the " + selectedCar.name + " for " + rentalDays + " days.")
+      this.destroy();
+      $(".alert").fadeOut();
+      email.display();
+    }
+  }
+}
 // Email Section Object
 var email = {
   display: function () {
@@ -343,7 +370,12 @@ var email = {
       // move onto the next section
       clientEmail = document.getElementById("emailAddress").value;
       this.destroy();
+      finalPrice = rentalFee * rentalDays + selectedCar.price;
       this.sendEmail();
+      document.getElementById("finalCarName").innerHTML = selectedCar.name;
+      document.getElementById("rentalTime").innerHTML = rentalDays;
+      document.getElementById("finalPrice").innerHTML = finalPrice;
+      document.getElementById("emailAddr").innerHTML = clientEmail;
       homePage.finish();
     }
   },
@@ -356,12 +388,10 @@ var email = {
       From: "maxwebblighting@gmail.com",
       Subject: `Robs Rental Company | ${selectedCar.name}`,
       Body: '<html><head><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></head><header><h3>' + emailContent.header + '</h3></header><br><h3>Kia Ora ' + clientName + ',<br><b>Here is the car we have selected for you</b><br><table><thead><tr><th>Seats</th></tr></thead><tr><td>' + selectedCar.name + '</td><td>' + selectedCar.seats + '</td></tr></table><br><h3>Your final price comes to $' + finalPrice + '<br>Please any questions please just let us know<br> Thanks, Robs Rentals'
-    }).then(
-      message => alert(message)
-    );
+    });
   }
 }
-
+// POINT OF INTRESET
 function findCar(_path, _usrCar) {
   // We don't need to vailate car names because some might have symbols in them :)
   if (_path == 'filter') {
@@ -377,9 +407,4 @@ function findCar(_path, _usrCar) {
     console.log("hello i did not work :(")
   }
 };
-
-
-
-
-
 

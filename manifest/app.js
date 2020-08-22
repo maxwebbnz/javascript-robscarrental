@@ -9,9 +9,11 @@ Contains: Main Defintion of cars and core site infomation used in other javascri
 // Base Client Infomation
 var clientName;
 var clientSeatSelc;
-var rentalTime;
-var rentalTimePrice;
+// renamed to rentalTimeDays | var rentalTime;
+var rentalDays;
+// no longer needed in v2 |var rentalTimePrice;
 var selectedCar;
+// this is used a lot more now haha (below)
 var finalPrice;
 var clientEmail;
 // New Variables (For v2)
@@ -39,14 +41,14 @@ const rentalFee = 4.50;
 
 // Base Car defintions (names, etc)
     // All cars with 1-3 Seats (classifed as small cars on the site)
-    var bacMono = {"name": "BAC Mono", "price": 40, "seats": 1, "amountinstock": 2, "imgurl": "https://thedriven.io/wp-content/uploads/2019/09/electric-mini-cooper-se-P90357228_highRes.jpg"};
-    var mx5 = {"name": "Fazada MX5","price": 230, "seats": "2", "amountinstock": 0, "imgurl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Mazda_Roadster_%28MX-5%29_by_Negawa_Bridge_%28cropped%29.jpg/1200px-Mazda_Roadster_%28MX-5%29_by_Negawa_Bridge_%28cropped%29.jpg"};
+    var bacMono = {"name": "BAC Mono", "price": 40, "seats": 1, "amountinstock": 2, "imgurl": "https://live.staticflickr.com/5315/5892319792_0bd960d91b_b.jpg"};
+    var mx5 = {"name": "Fazada MX5","price": 230, "seats": "2", "amountinstock": 0, "imgurl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/2nd_Mazda_MX-5_Miata.jpg"};
     // All Cars with 4-6 Seats (classifed as family cars on the site)
     var mini = {"name": "The Mini","price": 100, "seats": "4", "amountinstock": 2, "imgurl": "https://thedriven.io/wp-content/uploads/2019/09/electric-mini-cooper-se-P90357228_highRes.jpg"};
-    var falcon = {"name": "Yord Falcon","price": 120, "seats": "5", "amountinstock": 2};
+    var falcon = {"name": "Yord Falcon","price": 120, "seats": "5", "amountinstock": 2, "imgurl": "https://upload.wikimedia.org/wikipedia/commons/c/cc/2014_Ford_Falcon_%28FG_X%29_XR6_Turbo_sedan_%2823382738252%29.jpg"};
     // All Cars with 7+ Seats (classifed as extra large cars on the site)
-    var outLander = {"name": "Yoyota OutLander","price": 140, "seats": "7", "amountinstock": 2};
-    var estima = {"name": "Yoyota Estima","price": 180, "seats": "8", "amountinstock": 2};
+    var outLander = {"name": "Yoyota OutLander","price": 140, "seats": "7", "amountinstock": 2, "imgurl": "https://p0.pikist.com/photos/798/853/toyota-rav-4-hybrid-crossover-suv-cars-road-trip-travel-amg.jpg"};
+    var estima = {"name": "Yoyota Estima","price": 180, "seats": "8", "amountinstock": 2, "imgurl": "https://upload.wikimedia.org/wikipedia/commons/0/05/1997_Toyota_Estima_Lucida_2.2_Front.jpg"};
 
 // All Cars on lot
     const allCars = [bacMono, mx5, mini, falcon, outLander, estima];   

@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Jquery and Popper UI (for bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- Bootbox Alert Library (for warning/error handling) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"
+        integrity="sha512-8vfyGnaOX2EeMypNMptU+MwwK206Jk1I/tMQV4NkhOz+W8glENoMhGyU6n/6VgQUhQcJH8NqQgHhMtZjJJBv3A=="
+        crossorigin="anonymous"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="manifest/app.js"></script>
     <script src="manifest/homepage.js"></script>
@@ -54,7 +56,12 @@
     <!-- Same section but displayed at the end!-->
     <div class="final">
         <h2>All Done and Dusted!</h2>
-        <p><i>Please check your inbox for the final rental pricing and details</i></p>
+        <p><i>Your Infomation is below:</i></p>
+        <hr>
+        <p><b>Selected Car: </b><span id="finalCarName"></span></p>
+        <p><b>Day's Rented: </b><span id="rentalTime"></span></p>
+        <p><b>Final Price: </b>$<span id="finalPrice"></span></p>
+        <p><b>Your Email: </b><span id="emailAddr"></span></p>
         <hr>
         <h6>Need another car?</h6>
         <button type="button" name="" id="" class="btn btn-primary"
@@ -79,13 +86,13 @@
     </div>
     <!-- Filter Selector Section -->
     <div class="filter">
-        <form action="">
-            <label for="clientName">What car did you have in mind?</label>
-            <input type="text" class="form-control" id="carIdealForClient" placeholder="Mazada MX5">
-            <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar()">That's the Car!</button>
-            <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar('noCar')">I don't know what car
-                I want</button>
-        </form>
+        <h4>Do any of these cars suit your needs?</h4>
+        <hr>
+        <select id="carList"></select>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar()">That's the Car!</button>
+        <button type="button" class="btn btn-primary" onclick="enterDetails.idealCar('noCar')">Actually I need help
+            deciding!</button>
     </div>
     <!-- End of Filter Section -->
 
@@ -100,6 +107,7 @@
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
                 <option value="6">6</option>
                 <option value="7">7</option>
                 <option value="8">8</option>
@@ -109,9 +117,14 @@
         <div class="price-range">
             <h4>What type of car were you looking for?</h4>
             <hr>
-            <button type="button" id="b1" value="budget" class="btn btn-primary">Budget</button>
-            <button type="button" id="b2" value="family" class="btn btn-primary">Family</button>
-            <button type="button" id="b3" value="professional" class="btn btn-primary">Professional</button>
+            <button type="button" id="b1" value="budget" class="btn btn-primary">Budget (up to $100)</button>
+            <button type="button" id="b2" value="family" class="btn btn-primary">Family (up to $200)</button>
+            <button type="button" id="b3" value="professional" class="btn btn-primary">Professional (up to
+                $300)</button>
+            <!-- This is a box because why the-->
+            <div class="alert">
+
+            </div>
         </div>
     </div>
     <!-- End of Question Section -->
@@ -123,7 +136,7 @@
                     <img src="" width="40%" height="60%" class="rounded border border-primary" id="carImage"
                         alt="Car Image">
                     <hr>
-                    <b><span id="carName"></span></b>
+                    <b id="carName"></b>
                     <br>
                     <p>$<span id="carPrice"></span></p>
                 </div>
@@ -137,6 +150,14 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!-- First we now need to ask for the dates they are wanting to rent to grab total of the dates -->
+    <div class="datesSelection">
+        <h4>What days will you be needing the car?</h4>
+        <hr>
+        <input id="clientRentalDay" placeholder="Days (in numbers">
+        <button type="button" class="btn btn-primary" onclick="dates.dateGrab()">That's the one!</button>
+        <p class="alert">The date that you entered is not vaild, try again!</p>
     </div>
     <!-- Now to ask for there email address to email final price -->
     <div class="emailPlease">
@@ -182,10 +203,18 @@
         text-align: center;
         margin-top: 4%;
     }
-    .seatsselection{
+
+    .seatsselection {
         display: none;
     }
+
     .price-range {
+        display: none;
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .datesSelection {
         display: none;
         text-align: center;
         margin-top: 4%;
@@ -195,6 +224,10 @@
         display: none;
         text-align: center;
         margin-top: 4%;
+    }
+
+    .carList {
+        margin-bottom: 2%;
     }
 
     .showSelected {
