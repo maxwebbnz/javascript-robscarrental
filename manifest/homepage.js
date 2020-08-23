@@ -286,7 +286,13 @@ Purpose: Finding a car that is ideal for the client
       }
     }
   },
-
+    /*
+    Function Name: setSection
+    Purpose: A looping function to loop inside itself
+  */
+  setSection: function (_sec) {
+    this.autoAllocation(_sec);
+  },
   /*
     Function Name: autoAllocation
     Purpose: Finding Client's Seats Wishes, Price Range and finding a car suited to the client's needs.
