@@ -1,90 +1,112 @@
-v.6
-begin
-    when button is true
-        display #getname section
-        start Name Section
-                Name Section
-                    when button is true
-                        if value of input clientname is a number or of a null value 
-                            alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
-                            wait till user tries again
-                        else if clientName equals a common name pre-defined
-                            prompt user to confirm the name
-                                if confirm window is true
-                                    fade out #getname section
-                                    animate #seatneeded to center of the screen
-                                    fade in #seatneeded
-                                    animate body background-color to yellow
-                                    change title of page to Seat Selection
-                                    log Client's Name
-                                else if confirm window is false
-                                    alert user to try again (e.g Enter in a real name and try again)
-                        else if input passes all checks
-                                    fade out #getname section
-                                    animate #seatneeded to center of the screen
-                                    fade in #seatneeded
-                                    animate body background-color to yellow
-                                    change title of page to Seat Selection
-                                    log Client's Name
-                                    start Seats Section
-            Seats Section
-                    when button is true 
-                        if value of input seatsneeded is not a number or of null value
-                             alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
-                             wait till user pushes button again
-                        else if input passes all checks
-                            fade out #seatneeded section
-                            animate #setRentalDate to center of the screen
-                            fade in #setRentalDate
-                            change title of page to Rental Dates
-                         log Client's Seat Choice 
-            Rental Date Section
-                    when button is true
-                        if value of input rentalTime is not a number or of null value
-                             alert user with the error (e.g Whoops! You have entered the wrong infomation, try again!)
-                             wait till user pushes button again
-                        else if input passes all checks
-                            fade out #setrentalleng
-                            animate client confirm section to center of screen
-                            fade in client confirm section
-                            change title of page to Confirm Selection
-                            start Processing infomation
-            Processing Infomation Section
-                    when Processing Infomation is true
-                        change page title to Processing
-                            try
-                                find in selectedCar variable for car equals the client's seat wishes.
-                                    set selectedCar to found infomation
-                                if there is no seats that match excatly what the user entered
-                                    find in allCars array a car that has seats greater than the client's seat wishes.
-                                        set selectedCar to found infomation
-                                else if the selectedCar is not in stock
-                                    find in allCars array a car that has a car in stock which matches the client's seat wishes or is greater than client's seat wishes
-                                        set selectedCar to found infomation
-                                if selectedCar is less than clientSeatSelec
-                                    find in allCars array a car that is greater than clientSeatSelec
-                                        set selectedCar to found Infomation
-                                finally 
-                                    log to console the selectedCar name.
-                            when error occurs
-                                catch and log to console.
-                        after car has been found
-                            set the rentalTimePrice to be 2 times the amount of the rentalTime (defined by user)
-                            then set finalPrice to be the total of the rentalTimePrice, rentalFee and the selectedCar.price object.
-                            log the price that has been found 
-                            start informClient
-            Inform CLient Section
-                    once informClient has started
-                        set page title to the car that has been chosen
-                        fill the page with the following:
-                            carname = selectedCar.name
-                            carseats = selectedCar.seats
-                            carimage = selectedCar.imgurl
-                            rentalPrice = finalPrice
-                Final Details Section
-                    once button is pressed
-                        set clientEmail to the value from the value
-                        once set
-                            send email to the clientEmail
-                end section
-end program
+v2 (branch called verison two)
+    begin
+        when Select a Car button is called
+            fade out Heading section
+            fade in nameFinder section
+            start nameFinder
+        Name Finder section
+            once Submit button is called
+                if user's input only contains letters, has a space and does not include any symbols
+                    store user's input into the clientName function
+                    include clientName into navbar next to branding
+                    fade out Name section
+                    fade in menuSelector section
+                    start menuSelector
+        Menu Selector Section
+            if user wants to choose there Car  
+                set userPath to filter
+                fade out menuSelector section
+                fade in enterDetails section
+                start enterDetails Section
+            else if user wants to enter in details and get program to decide
+                set userPath to auto
+                fade out menuSelector section
+                fade in enterDetails section
+                start enterDetails Section
+        Enter Details Section
+            if userPath is equal to filter then
+                append dropdown to display every car name in the allCars array
+                once That's the Car button is called
+                    set usersIdealCar to the value of drop down
+                        start findCar function
+            else if userPath is equal to auto then
+                display seat dropdown
+                once value changes 
+                    set clientSeatSelec to the value from the dropdown option
+                    display budget range selection
+                        once a button is pressed
+                            set userPriceRange to the value of the button pressed
+                            fade out enterDetails section
+                            start autoAllocation
+        Find Car function
+            check if user's path is filter before running
+                if true
+                    find in allCars array a car that matches the usersIdealCar value
+                    start selected section
+                if cannot find a car that matches the usersIdealCar value
+                    alert end user ("Cannot Find a Car that matches your wishes")
+                    fade in Menu Selector Section (loop around)
+        Auto Allocation function
+            if usersPriceRange is equal to budget
+                set selectedCar to a car that is equal to clientSeatSelec
+                set values of carName, carPrice, carImageURL to releveant values.
+                start selected section
+                    if selectedCar price is greater than 100 
+                        alert user ("Could Not find a Car in your price range")
+                        fade in Menu Selector (loop around)
+             else if usersPriceRange is equal to family
+                set selectedCar to a car that is equal to clientSeatSelec
+                set values of carName, carPrice, carImageURL to releveant values.                    start selected section
+                start selected section
+                    if selectedCar price is greater than 200 
+                        alert user ("Could Not find a Car in your price range")
+                        fade in Menu Selector (loop around)
+            else if usersPriceRange is equal to family
+                set selectedCar to a car that is equal to clientSeatSelec
+                set values of carName, carPrice, carImageURL to releveant values.
+                start selected section
+                    if selectedCar price is greater than 300 
+                        alert user ("Could Not find a Car in your price range")
+                        fade in Menu Selector (loop around)
+            if error occurs
+                alert user ("There was an error, sending you back to start")
+                refresh page 
+        Selected Car Section
+            fade in Selected Section
+            display car image, car name and car price
+            if user is happy with selection 
+                fade out Selected Car Section
+                fade in Dates section
+                start Dates section
+            else if not happy  
+                alert("You weren't happy, so sending you back to the start")
+                fade out Selected Car Section
+                fade in Menu Selector section (loop around)
+        Date Section 
+            once That's the One! button is called
+                check that user's input is a single numeric value
+                    if true
+                        set rentalDays to user's input
+                        fade out Dates section
+                        fade in Email section
+                        start Email section 
+                    if false
+                        alert user ("Invaild input, try again")
+        Email Section
+            once Submit button is called
+                check that user's input matches an standard email address
+                    if true
+                        set clientEmail to user's input
+                        fade out Email section
+                        fade in finalInfomation section
+                        start finalInfomation section
+                    if false
+                        alert user("Invaild input, try again!)
+        Final Infomation Section
+            display all infomation that the program has chosen for the user based on user input
+                once Select a Car button is called
+                    fade out finalInfomation section
+                    fade in menuSelector (loop around)
+    end program
+
+                    

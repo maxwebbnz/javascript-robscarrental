@@ -32,8 +32,6 @@ const emailReg = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-
 // this checks for white space, and a proper email address!
 const nameReg= /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
 
-// Common names that are entered as fake
-const commonNames = {}
 
 // Base rental fee charged on everything
 const rentalFee = 4.50;
