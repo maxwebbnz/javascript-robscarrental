@@ -6,7 +6,6 @@ File: homepage.js
 
 Some content referenced in this file can be found in the app file (app.js)
 */
-
 // Global Functions and/or Base defintions of variables \\
 
 // Global Object 
@@ -366,12 +365,11 @@ Purpose: Finding a car that is ideal for the client
       catch (err) {
         console.log(err)
         // POINT OF INTEREST BELOW
-        bootbox.alert("We encountered an error, restarting program! Sorry for the inconveince");
+        // removed, was causing a looping issue lol bootbox.alert("We encountered an error, restarting program! Sorry for the inconveince");
       }
     }
   },
 };
-
 
 var selected = {
   /*
@@ -434,7 +432,9 @@ Purpose: Grabbing the value from the user and setting the rentalDays variable
   dateGrab: function () {
     if (!validate.num(document.getElementById("clientRentalDay").value)) {
       $(".alert").fadeIn();
-    } else {
+    } if(document.getElementById("clientRentalDay").value < minRentalDays) {
+      $(".alert").fadeIn();
+    }else{
       rentalDays = document.getElementById("clientRentalDay").value
       console.log("Client wants to hire the " + selectedCar.name + " for " + rentalDays + " days.")
       this.destroy();
@@ -522,4 +522,6 @@ function findCar(_path, _usrCar) {
     console.log("hello i did not work :(")
   }
 };
+
+
 

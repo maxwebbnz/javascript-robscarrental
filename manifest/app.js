@@ -36,6 +36,9 @@ const nameReg= /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/
 // Base rental fee charged on everything
 const rentalFee = 4.50;
 
+// Min Date of Rental
+const minRentalDays = 1;
+
 
 // Base Car defintions (names, etc)
     // All cars with 1-3 Seats (classifed as small cars on the site)
