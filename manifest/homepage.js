@@ -300,8 +300,8 @@ Purpose: Finding a car that is ideal for the client
     if (_section == "seats") {
       $(".auto").fadeIn();
       $(".seatsselection").fadeIn();
-      $('#seats').change(function () {
-        clientSeatSelc = $(this).val();
+      $('#seatsbutton').click(function () {
+        clientSeatSelc = $('#seats').val();
         console.log("Seat Selection has been set to " + clientSeatSelc);
         // this.autoAllocation("price")
         // instead...
