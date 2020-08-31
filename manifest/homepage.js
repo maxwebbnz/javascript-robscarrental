@@ -434,7 +434,7 @@ Purpose: Grabbing the value from the user and setting the rentalDays variable
   dateGrab: function () {
     if (!validate.num(document.getElementById("clientRentalDay").value)) {
       $(".alert").fadeIn();
-    } else if(document.getElementById("clientRentalDay").value < minRentalDays) {
+    } if(document.getElementById("clientRentalDay").value < minRentalDays) {
       $(".alert").fadeIn();
     }else{
       rentalDays = document.getElementById("clientRentalDay").value
