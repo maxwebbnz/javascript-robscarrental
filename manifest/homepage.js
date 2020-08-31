@@ -19,8 +19,6 @@ var global = {
     document.title = "Rob's Rentals | " + section
     // Log for error checking / handling
     console.log("Section Changed to " + section)
-    // fix for not being able to fade out alerts on section change!
-    $(".alert").fadeOut();
   }
 }
 
