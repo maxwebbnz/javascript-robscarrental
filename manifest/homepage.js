@@ -18,6 +18,7 @@ var global = {
   setSection: function (section) {
     document.title = "Rob's Rentals | " + section
     // Log for error checking / handling
+    $('#alert').fadeOut();
     console.log("Section Changed to " + section)
   }
 }
