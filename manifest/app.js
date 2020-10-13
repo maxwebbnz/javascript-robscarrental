@@ -38,7 +38,7 @@ const rentalFee = 4.50;
 
 // Min Date of Rental
 const minRentalDays = 1;
-
+ const maxRentalDays = 10;
 
 // Base Car defintions (names, etc)
     // All cars with 1-3 Seats (classifed as small cars on the site)

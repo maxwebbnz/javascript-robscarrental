@@ -435,6 +435,8 @@ Purpose: Grabbing the value from the user and setting the rentalDays variable
       $(".alert").fadeIn();
     } else if(document.getElementById("clientRentalDay").value < minRentalDays) {
       $(".alert").fadeIn();
+    }else if(document.getElementById("clientRentalDay").value > maxRentalDays) {
+      $(".alert").fadeIn();
     }else{
       rentalDays = document.getElementById("clientRentalDay").value
       console.log("Client wants to hire the " + selectedCar.name + " for " + rentalDays + " days.")
